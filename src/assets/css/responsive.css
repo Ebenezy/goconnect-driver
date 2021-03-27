@@ -1,0 +1,35 @@
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+    .homepage {
+        height: 100%;
+    }
+    .hero-contents h1 {
+        font-size: 25px;
+        line-height: 35px;
+    }
+    .hero-contents p {
+        font-size: 16px;
+    }
+    .get-dropoff {
+        margin: 1rem 0 1rem;
+    }
+    .icon1 {
+        width: 55px;
+        height: 55px;
+        margin: 5px;
+    }
+    .icon1 img {
+        width: 30px;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .homepage {
+        height: 100%;
+    }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1024px) {
+    .homepage {
+        height: 100%;
+    }
+}

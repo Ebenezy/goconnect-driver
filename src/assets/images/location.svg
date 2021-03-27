@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="20px" viewBox="0 0 14 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Shape</title>
+    <g id="Landing" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD-Copy" transform="translate(-280.000000, -421.000000)" fill="#303F9F">
+            <g id="Group" transform="translate(227.000000, 307.000000)">
+                <path d="M60,114 C56.1,114 53,117.1 53,121 C53,126.2 60,134 60,134 C60,134 67,126.2 67,121 C67,117.1 63.9,114 60,114 L60,114 Z M60,123.5 C58.6,123.5 57.5,122.4 57.5,121 C57.5,119.6 58.6,118.5 60,118.5 C61.4,118.5 62.5,119.6 62.5,121 C62.5,122.4 61.4,123.5 60,123.5 L60,123.5 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>
