@@ -1,7 +1,5 @@
 import axios from "axios";
-
-const api_key = process.env.VUE_APP_api_key;
-const baseUrl = `https://sureb-69.herokuapp.com/api`;
+const baseUrl = `https://goconnect.herokuapp.com/api`;
 axios.defaults.baseURL = baseUrl;
 
 const ApiService = {
@@ -15,13 +13,13 @@ const ApiService = {
     axios.defaults.headers.common = {};
   },
   get(resource) {
-    return axios.get(resource + `?api_key=${api_key}`);
+    return axios.get(resource);
   },
   post(resource, data) {
-    return axios.post(resource + `?api_key=${api_key}`, data);
+    return axios.post(resource, data);
   },
   put(resource, data) {
-    return axios.put(resource + `?api_key=${api_key}`, data);
+    return axios.put(resource, data);
   },
   delete(resource) {
     return axios.delete(resource);

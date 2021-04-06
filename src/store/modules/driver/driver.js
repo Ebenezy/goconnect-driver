@@ -4,10 +4,9 @@ import { actions } from "./actions";
 
 const state = {
   USER_DATA: {},
-  AUTH_TOKEN: "",
-  ROLE:"",
-  IS_AUTHENTICATED: false,
-  USER_DETAILS: {},
+  SEARCH_RESULTS: [],
+  UPLOAD: {},
+  ROUTES: {}
 };
 
 export default { state, getters, mutations, actions };
