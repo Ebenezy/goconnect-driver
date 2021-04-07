@@ -163,7 +163,6 @@
                       name=""
                       class="name-input"
                     >
-                      <option value="Location">Location</option>
                       <option
                         v-for="state in states"
                         :key="state._id"
