@@ -21,8 +21,7 @@
                 <option value="bike">Bike</option>
                 <option value="truck">Truck</option>
               </select>
-              <i class="">
-              <font-awesome-icon icon="chevron-down" /></i>
+              <i class=""> <font-awesome-icon icon="chevron-down"/></i>
             </div>
           </div>
         </div>
@@ -96,7 +95,7 @@ export default {
         { value: "b", text: "Keke" },
         { value: "c", text: "Bike" },
         { value: "d", text: "Truck" }
-      ],
+      ]
     };
   },
   methods: {
