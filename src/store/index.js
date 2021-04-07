@@ -1,16 +1,14 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import VuexPersist from "vuex-persist";
-import User from "./modules/driver/driver";
-
-
+import Drivers from "./modules/driver/driver";
 Vue.use(Vuex);
 
 const vuexPersist = new VuexPersist({
   key: "vuex",
   storage: localStorage,
   reducer: state => ({
-    User: state.User, //only saves the user module
+    Driver: state.Driver
   })
 });
 
@@ -19,7 +17,7 @@ export default new Vuex.Store({
   mutations: {},
   actions: {},
   modules: {
-    User,
+    Driver: Drivers
   },
   plugins: [vuexPersist.plugin]
 });

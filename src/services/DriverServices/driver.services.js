@@ -2,70 +2,33 @@ import { ApiService } from "../api.services";
 
 const driverService = {
   //Signup
-  SignUp: ({ firstName, lastName, otherName, email, country, phoneNumber }) => {
+  SignUp: ({ firstName, lastName, otherName, email, country, phone }) => {
     return new Promise(function(resolve, reject) {
-      ApiService.post("/rider/sign-up", {
+      ApiService.post("/driver", {
         firstName,
         lastName,
         otherName,
         email,
         country,
-        phoneNumber
+        phone
       })
         .then(({ data }) => {
-          if (data.status == 201 || data.status == 200) return resolve(data);
-          reject(data);
+          return resolve(data);
         })
         .catch(error => {
           reject(error.response.data);
         });
     });
   },
-
-  //Signup
-  SignIn: ({ phoneNumber }) => {
-    return new Promise(function (resolve, reject) {
-      ApiService.post("/rider/kyc-sigin", {
-
-        phoneNumber
-      })
-        .then(({ data }) => {
-          if (data.status == 201 || data.status == 200) return resolve(data);
-          reject(data);
-        })
-        .catch(error => {
-          reject(error.response.data);
-        });
-    });
-  },
-
-  //Signup Complete
-  SignInComplete: ({ phoneNumber, verificationCode }) => {
-    return new Promise(function (resolve, reject) {
-      ApiService.post("/rider/kyc-sigin-verification", {
-        verificationCode,
-        phoneNumber
-      })
-        .then(({ data }) => {
-          if (data.status == 201 || data.status == 200) return resolve(data);
-          reject(data);
-        })
-        .catch(error => {
-          reject(error.response.data);
-        });
-    });
-  },
-
-  //Verify Email
-  VerifyEmail: ({ email, verificationCode }) => {
+  //routes
+  SaveRoutes: ({ routes, id }) => {
     return new Promise(function(resolve, reject) {
-      ApiService.post("/rider/email-verification", {
-        email,
-        verificationCode
+      ApiService.post("/driver/routes", {
+        routes,
+        id
       })
         .then(({ data }) => {
-          if (data.status == 201 || data.status == 200) return resolve(data);
-          reject(data);
+          return resolve(data);
         })
         .catch(error => {
           reject(error.response.data);
@@ -73,66 +36,14 @@ const driverService = {
     });
   },
 
-  //Verify Phone
-  VerifyPhone: ({ phoneNumber, verificationCode }) => {
+  //search for routes
+  searchRoutes: ({ destination }) => {
     return new Promise(function(resolve, reject) {
-      ApiService.post("/rider/phone-verification", {
-        phoneNumber,
-        verificationCode
+      ApiService.post("/driver/find-driver", {
+        destinations: destination
       })
         .then(({ data }) => {
-          if (data.status == 201 || data.status == 200) return resolve(data);
-          reject(data);
-        })
-        .catch(error => {
-          reject(error.response.data);
-        });
-    });
-  },
-
-  //Get Bank List
-  GetBankList: () => {
-    return new Promise(function(resolve, reject) {
-      ApiService.get("/bank")
-        .then(({ data }) => {
-          if (data.status == 201 || data.status == 200) return resolve(data);
-          reject(data);
-        })
-        .catch(error => {
-          reject(error.response.data);
-        });
-    });
-  },
-
-  //Verify Bank
-  VerifyBank: ({ accountNumber, bankCode }) => {
-    return new Promise(function(resolve, reject) {
-      ApiService.post("/rider/bank-verification", {
-        accountNumber,
-        bankCode
-      })
-        .then(({ data }) => {
-          if (data.status == 201 || data.status == 200) return resolve(data);
-          reject(data);
-        })
-        .catch(error => {
-          reject(error.response.data);
-        });
-    });
-  },
-
-  //Upload Bank Details
-  UploadBankDetails: ({ accountNumber, bankCode, id, accountName }) => {
-    return new Promise(function(resolve, reject) {
-      ApiService.post("/rider/bank-details", {
-        id,
-        accountNumber,
-        accountName,
-        bankCode
-      })
-        .then(({ data }) => {
-          if (data.status == 201 || data.status == 200) return resolve(data);
-          reject(data);
+          return resolve(data);
         })
         .catch(error => {
           reject(error.response.data);
@@ -149,45 +60,7 @@ const driverService = {
     formData.append("image", image);
 
     return new Promise(function(resolve, reject) {
-      ApiService.post("/rider/driver-license", formData)
-        .then(({ data }) => {
-          resolve(data);
-        })
-        .catch(error => {
-          reject(error.response.data);
-        });
-    });
-  },
-
-  //Upload Proof of Address
-  UploadProofOfAddress: ({ documentType, issuedDate, image, id }) => {
-    const formData = new FormData();
-    formData.set("id", id);
-    formData.set("documentType", documentType);
-    formData.set("issuedDate", issuedDate);
-    formData.append("image", image);
-
-    return new Promise(function(resolve, reject) {
-      ApiService.post("/rider/proof-of-address", formData)
-        .then(({ data }) => {
-          resolve(data);
-        })
-        .catch(error => {
-          reject(error.response.data);
-        });
-    });
-  },
-
-  //Upload Lasdri Card
-  UploadLasdri: ({ idNumber, issuedDate, image, id }) => {
-    const formData = new FormData();
-    formData.set("id", id);
-    formData.set("idNumber", idNumber);
-    formData.set("issuedDate", issuedDate);
-    formData.append("image", image);
-
-    return new Promise(function(resolve, reject) {
-      ApiService.post("/rider/lasdri-card", formData)
+      ApiService.post("/driver/driver-licence", formData)
         .then(({ data }) => {
           resolve(data);
         })
@@ -204,7 +77,7 @@ const driverService = {
     formData.append("image", image);
 
     return new Promise(function(resolve, reject) {
-      ApiService.post("/rider/profile-photo", formData)
+      ApiService.post("/driver/profile-photo", formData)
         .then(({ data }) => {
           resolve(data);
         })
@@ -216,7 +89,7 @@ const driverService = {
 
   //Resend Verification
   ResendVerification: ({ accountId, verificationType }) => {
-    return new Promise(function (resolve, reject) {
+    return new Promise(function(resolve, reject) {
       ApiService.post("/rider/resend-verification-code", {
         accountId,
         verificationType
@@ -229,7 +102,7 @@ const driverService = {
           reject(error.response.data);
         });
     });
-  },
+  }
 };
 
 export { driverService };

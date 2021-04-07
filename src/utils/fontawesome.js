@@ -37,7 +37,8 @@ import {
   faCaretRight,
   faPowerOff,
   faChevronRight,
-  faPhoneSquare
+  faPhoneSquare,
+  faAngleDown
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import {
@@ -92,7 +93,8 @@ library.add(
   faPowerOff,
   faChevronRight,
   faPhoneSquare,
-  faMapMarkerAlt
+  faMapMarkerAlt,
+  faAngleDown
 );
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);

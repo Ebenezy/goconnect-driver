@@ -129,6 +129,7 @@ body {
   padding: 0;
   font-family: Montserrat-Regular;
 }
+.input_form input,
 .contact-form input,
 .input_form input,
 .input-atm-card,
@@ -267,6 +268,12 @@ a:active {
   letter-spacing: 0;
   margin-bottom: 0;
 }
+.pick_up2 {
+  display: flex;
+  align-items: flex-end;
+  height: 100%;
+  width: 100%;
+}
 .pick_up h5 {
   font-family: AvenirNext-DemiBold;
   font-size: 14px;
@@ -277,8 +284,16 @@ a:active {
 .input_form {
   background: #EDEDED;
   display: flex;
+  align-items: center;
   padding: 0.4rem 1rem;
+  height: 47px;
 }
+/* .input_form2 {
+  background: #EDEDED;
+  display: flex;
+  padding: 0.4rem 1rem;
+  height: 47px;
+} */
 .input_form input {
   background: transparent;
   padding: 0.5rem;
@@ -297,13 +312,22 @@ a:active {
   color: #484848;
   letter-spacing: 0;
   width: 100%;
-  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  position: relative;
+  z-index: 1;
+  margin-right: -1.2rem;
+}
+.input_form i svg {
+  color: #303F9F;
+  position: relative;
+  z-index: 0;
 }
 .get_ride_btn {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  height: 47px;
   background: #0F77B1;
   font-family: AvenirNext-DemiBold;
   font-size: 14px;
