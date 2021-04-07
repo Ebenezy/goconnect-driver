@@ -157,44 +157,19 @@
                       id="stateofoperation"
                       class="name-input"
                     /> -->
-                    <select v-model="formData.stateofoperation" id="stateofoperation" name="" class="name-input">
+                    <select
+                      v-model="formData.stateofoperation"
+                      id="stateofoperation"
+                      name=""
+                      class="name-input"
+                    >
                       <option value="Location">Location</option>
-                      <option value="lagos">Lagos</option>
-                      <option value="abia">Abia</option>
-                      <option value="adamawa">Adamawa</option>
-                      <option value="akwaIbom">Akwa Ibom</option>
-                      <option value="anambra">Anambra</option>
-                      <option value="bauchi">Bauchi</option>
-                      <option value="bayelsa">Bayelsa</option>
-                      <option value="benue">Benue</option>
-                      <option value="borno">Borno</option>
-                      <option value="croseRiver">Cross River</option>
-                      <option value="dedlta">Delta</option>
-                      <option value="ebonyi">Ebonyi</option>
-                      <option value="edo">Edo</option>
-                      <option value="ekiti">Ekiti</option>
-                      <option value="enugu">Enugu</option>
-                      <option value="gombe">Gombe</option>
-                      <option value="imo">Imo</option>
-                      <option value="jigawa">Jigawa</option>
-                      <option value="kaduna">Kaduna</option>
-                      <option value="kano">Kano</option>
-                      <option value="katsina">Kastina</option>
-                      <option value="kebbi">Kebbi</option>
-                      <option value="kogi">Kogi</option>
-                      <option value="kwara">Kwara</option>
-                      <option value="nasarawa">Nasarawa</option>
-                      <option value="niger">Niger</option>
-                      <option value="ogun">Ogun</option>
-                      <option value="ondo">Ondo</option>
-                      <option value="osun">Osun</option>
-                      <option value="oyo">Oyo</option>
-                      <option value="plateau">Plateau</option>
-                      <option value="rivers">Rivers</option>
-                      <option value="sokoto">Sokoto</option>
-                      <option value="taraba">Taraba</option>
-                      <option value="yobe">Yobe</option>
-                      <option value="zamfara">Zamfara</option>
+                      <option
+                        v-for="state in states"
+                        :key="state._id"
+                        :value="state._id"
+                        >{{ state.name }}</option
+                      >
                     </select>
                   </div>
                 </div>
@@ -555,6 +530,7 @@
   </div>
 </template>
 <script>
+import { driverService } from "../services/DriverServices/driver.services";
 import { mapState, mapActions } from "vuex";
 import vuebase64 from "./vue-base64.vue";
 import VueGoogleAutocomplete from "vue-google-autocomplete";
@@ -591,12 +567,13 @@ export default {
         otherName: "",
         email: null,
         country: "Nigeria",
-        stateofoperation: "Abia State",
+        stateofoperation: "",
         phone: null,
         accountNumber: "",
         accountName: "",
         bankCode: ""
       },
+      states: [],
       uploads: {
         driversLicense: "",
         driversLicense_: null,
@@ -668,7 +645,8 @@ export default {
         otherName: this.formData.otherName,
         email: this.formData.email,
         phone: this.formData.phone,
-        country: this.formData.country
+        country: this.formData.country,
+        state: this.formData.stateofoperation
       };
 
       await this.userInfo(data)
@@ -777,7 +755,14 @@ export default {
       this.tabs[0].isActive = true;
       this.currentTab = 0;
     }
-
+    driverService
+      .LoadStates()
+      .then(res => {
+        this.states = res.data;
+      })
+      .catch(error => {
+        window.console.log(error);
+      });
     // this.$store.commit("SET_USER_DATA", "");
     // this.$store.commit("SET_SEARCH_RESULT", "");
   }

@@ -2,7 +2,15 @@ import { ApiService } from "../api.services";
 
 const driverService = {
   //Signup
-  SignUp: ({ firstName, lastName, otherName, email, country, phone }) => {
+  SignUp: ({
+    firstName,
+    lastName,
+    otherName,
+    email,
+    country,
+    phone,
+    state
+  }) => {
     return new Promise(function(resolve, reject) {
       ApiService.post("/driver", {
         firstName,
@@ -10,7 +18,8 @@ const driverService = {
         otherName,
         email,
         country,
-        phone
+        phone,
+        state
       })
         .then(({ data }) => {
           return resolve(data);
@@ -87,19 +96,15 @@ const driverService = {
     });
   },
 
-  //Resend Verification
-  ResendVerification: ({ accountId, verificationType }) => {
-    return new Promise(function(resolve, reject) {
-      ApiService.post("/rider/resend-verification-code", {
-        accountId,
-        verificationType
-      })
+  //load states
+  LoadStates: () => {
+    return new Promise((resolve, reject) => {
+      ApiService.get("/state")
         .then(({ data }) => {
-          if (data.status == 201 || data.status == 200) return resolve(data);
-          reject(data);
+          resolve(data);
         })
         .catch(error => {
-          reject(error.response.data);
+          reject(error.response.data.error);
         });
     });
   }
