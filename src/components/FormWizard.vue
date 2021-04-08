@@ -176,6 +176,21 @@
               <div class="row">
                 <div class="col-4">
                   <div class="form-group2">
+                    <label for="vehicletype">Vehicle Type *</label>
+                  </div>
+                </div>
+                <div class="col-8">
+                  <div class="form-group">
+                    <b-form-select
+                      :options="options"
+                      class="name-input"
+                    ></b-form-select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4">
+                  <div class="form-group2">
                     <label for="phone">Phone Number *</label>
                   </div>
                 </div>
@@ -587,7 +602,14 @@ export default {
         idNumberL: "",
         dateOfIssueL: ""
       },
-      routes: []
+      routes: [],
+      options: [
+        // { value: null, text: "Select Services" },
+        { value: "a", text: "Cab" },
+        { value: "b", text: "Keke" },
+        { value: "c", text: "Bike" },
+        { value: "d", text: "Truck" }
+      ]
     };
   },
   computed: {
