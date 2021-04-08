@@ -16,7 +16,14 @@
               </div>
               <div class="driver-name">
                 <p>{{ result.rider.firstName }} {{ result.rider.lastName }}</p>
-                <div class="connect-driver-btn">Connect Driver</div>
+                <div @click="readMore = !readMore" class="connect-driver-btn">
+                  <span v-if="readMore">
+                      <a href="tel:+2348080000000">0{{ result.rider.phone }}</a>
+                    </span>
+                    <span v-else>
+                      Connect Driver
+                    </span>
+                </div>
               </div>
             </div>
           </div>
@@ -42,7 +49,9 @@ export default {
     FindDriver
   },
   data() {
-    return {};
+    return {
+      readMore: false,
+    };
   },
   computed: {
     ...mapState({
