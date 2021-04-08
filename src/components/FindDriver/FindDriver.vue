@@ -61,14 +61,24 @@
           </div>
         </div>
         <div class="col-md-3 mb-3">
-          <div class="pick_up2">
+          <div class="pick_up2" v-if="searchLoading === false">
             <div
               @click.prevent="search"
               class="d-flex align-items-end h-100 w-100"
             >
-              <div class="get_ride_btn">
+              <div class="get_ride_btn cursor">
                 <span>GET RIDE</span>
                 <font-awesome-icon icon="chevron-right" class="fontawesom" />
+              </div>
+            </div>
+          </div>
+          <div class="pick_up2" v-else>
+            <div class="d-flex align-items-end h-100 w-100">
+              <div class="loading">
+                <div
+                  class="spinner-border text-light text-center"
+                  role="status"
+                ></div>
               </div>
             </div>
           </div>
@@ -87,6 +97,7 @@ export default {
   },
   data() {
     return {
+      searchLoading: false,
       destination: null,
       searchResult: [],
       options: [
@@ -121,6 +132,7 @@ export default {
       let data = {
         destination: this.destination
       };
+      this.searchLoading = true;
       await driverService
         .searchRoutes(data)
         .then(res => {
@@ -133,6 +145,9 @@ export default {
         })
         .catch(err => {
           this.$toastr.e(err.Error || err.error || err, "Failed!");
+        })
+        .finally(() => {
+          this.searchLoading = false;
         });
     },
     emitToParent() {
@@ -141,3 +156,21 @@ export default {
   }
 };
 </script>
+<style scoped>
+.cursor {
+  cursor: pointer;
+}
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 47px;
+  background: #0f77b1;
+  font-family: AvenirNext-DemiBold;
+  font-size: 14px;
+  color: #ffffff;
+  letter-spacing: 0;
+  padding: 1rem 1rem;
+}
+</style>

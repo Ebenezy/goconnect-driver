@@ -16,13 +16,18 @@
               </div>
               <div class="driver-name">
                 <p>{{ result.rider.firstName }} {{ result.rider.lastName }}</p>
-                <div @click="readMore = !readMore" class="connect-driver-btn">
+                <div @click="readMore = true" class="connect-driver-btn">
                   <span v-if="readMore">
-                      <a href="tel:+2348080000000">0{{ result.rider.phone }}</a>
-                    </span>
-                    <span v-else>
-                      Connect Driver
-                    </span>
+                    <a :href="`tel:0${result.rider.phone}`"
+                      >0{{ result.rider.phone }}</a
+                    >
+                    <!-- <router-link :to="'tel:+2340' + result.rider.phone"
+                      >0{{ result.rider.phone }}</router-link
+                    > -->
+                  </span>
+                  <span v-else>
+                    Connect Driver
+                  </span>
                 </div>
               </div>
             </div>
@@ -50,7 +55,7 @@ export default {
   },
   data() {
     return {
-      readMore: false,
+      readMore: false
     };
   },
   computed: {
