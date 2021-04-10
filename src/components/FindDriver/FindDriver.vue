@@ -15,11 +15,18 @@
                   :options="options"
                   class="select_services_input"
                 ></b-form-select> -->
-              <select name="vehicles">
-                <option value="cab">Cab</option>
-                <option value="keke">Keke Napep</option>
-                <option value="bike">Bike</option>
-                <option value="truck">Truck</option>
+              <select
+                v-model="vehicle"
+                id="stateofoperation"
+                name=""
+                classname="form-control name-input "
+              >
+                <option
+                  v-for="vehicle in vehicleType"
+                  :key="vehicle._id"
+                  :value="vehicle._id"
+                  >{{ vehicle.name }}</option
+                >
               </select>
               <i class=""> <font-awesome-icon icon="chevron-down"/></i>
             </div>
@@ -97,16 +104,11 @@ export default {
   },
   data() {
     return {
+      vehicle: "6070eac16dbf5ac4418056a0",
       searchLoading: false,
       destination: null,
       searchResult: [],
-      options: [
-        // { value: null, text: "Select Services" },
-        { value: "a", text: "Cab" },
-        { value: "b", text: "Keke" },
-        { value: "c", text: "Bike" },
-        { value: "d", text: "Truck" }
-      ]
+      vehicleType: []
     };
   },
   methods: {
@@ -130,7 +132,8 @@ export default {
         return;
       }
       let data = {
-        destination: this.destination
+        destination: this.destination,
+        vehicle: this.vehicle
       };
       this.searchLoading = true;
       await driverService
@@ -153,6 +156,16 @@ export default {
     emitToParent() {
       this.$emit("search", this.searchResult);
     }
+  },
+  mounted() {
+    driverService
+      .LoadVehicleType()
+      .then(res => {
+        this.vehicleType = res.data;
+      })
+      .catch(error => {
+        window.console.log(error);
+      });
   }
 };
 </script>

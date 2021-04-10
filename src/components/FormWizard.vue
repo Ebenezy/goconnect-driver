@@ -180,12 +180,19 @@
                   </div>
                 </div>
                 <div class="col-8">
-                  <div class="form-group">
-                    <b-form-select
-                      :options="options"
-                      class="name-input"
-                    ></b-form-select>
-                  </div>
+                  <select
+                    v-model="formData.vehicle"
+                    id="stateofoperation"
+                    name=""
+                    class="name-input"
+                  >
+                    <option
+                      v-for="vehicle in vehicleType"
+                      :key="vehicle._id"
+                      :value="vehicle._id"
+                      >{{ vehicle.name }}</option
+                    >
+                  </select>
                 </div>
               </div>
               <div class="row">
@@ -581,7 +588,8 @@ export default {
         otherName: "",
         email: null,
         country: "Nigeria",
-        stateofoperation: "",
+        stateofoperation: "606da63f9f5ab8521c71b533",
+        vehicle: "6070eac16dbf5ac4418056a0",
         phone: null,
         accountNumber: "",
         accountName: "",
@@ -603,13 +611,7 @@ export default {
         dateOfIssueL: ""
       },
       routes: [],
-      options: [
-        // { value: null, text: "Select Services" },
-        { value: "a", text: "Cab" },
-        { value: "b", text: "Keke" },
-        { value: "c", text: "Bike" },
-        { value: "d", text: "Truck" }
-      ]
+      vehicleType: []
     };
   },
   computed: {
@@ -667,7 +669,8 @@ export default {
         email: this.formData.email,
         phone: this.formData.phone,
         country: this.formData.country,
-        state: this.formData.stateofoperation
+        state: this.formData.stateofoperation,
+        vehicle: this.formData.vehicle
       };
 
       await this.userInfo(data)
@@ -780,6 +783,14 @@ export default {
       .LoadStates()
       .then(res => {
         this.states = res.data;
+      })
+      .catch(error => {
+        window.console.log(error);
+      });
+    driverService
+      .LoadVehicleType()
+      .then(res => {
+        this.vehicleType = res.data;
       })
       .catch(error => {
         window.console.log(error);

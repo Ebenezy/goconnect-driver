@@ -9,7 +9,8 @@ const driverService = {
     email,
     country,
     phone,
-    state
+    state,
+    vehicle
   }) => {
     return new Promise(function(resolve, reject) {
       ApiService.post("/driver", {
@@ -19,7 +20,8 @@ const driverService = {
         email,
         country,
         phone,
-        state
+        state,
+        vehicle
       })
         .then(({ data }) => {
           return resolve(data);
@@ -46,10 +48,11 @@ const driverService = {
   },
 
   //search for routes
-  searchRoutes: ({ destination }) => {
+  searchRoutes: ({ destination, vehicle }) => {
     return new Promise(function(resolve, reject) {
       ApiService.post("/driver/find-driver", {
-        destinations: destination
+        destinations: destination,
+        vehicle
       })
         .then(({ data }) => {
           return resolve(data);
@@ -100,6 +103,18 @@ const driverService = {
   LoadStates: () => {
     return new Promise((resolve, reject) => {
       ApiService.get("/state")
+        .then(({ data }) => {
+          resolve(data);
+        })
+        .catch(error => {
+          reject(error.response.data.error);
+        });
+    });
+  },
+  //load Vehicle type
+  LoadVehicleType: () => {
+    return new Promise((resolve, reject) => {
+      ApiService.get("/vehicle")
         .then(({ data }) => {
           resolve(data);
         })
